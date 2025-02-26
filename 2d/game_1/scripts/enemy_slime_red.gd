@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var SPEED: int = 50
 @export var CHASE_SPEED: int = 100
 @export var ACCELARATION: int = 300
+@export var CHASE_WAIT_TIME: float = 5.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast: RayCast2D = $AnimatedSprite2D/RayCast2D
@@ -50,6 +51,7 @@ func chase_player() -> void:
 
 func stop_chase() -> void:
 	if timer.time_left <= 0:
+		timer.wait_time = CHASE_WAIT_TIME
 		timer.start()
 
 func handle_movement(delta: float) -> void:
