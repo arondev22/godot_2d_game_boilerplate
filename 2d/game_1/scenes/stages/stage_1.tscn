@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cx4h6jyw2xueo"]
+[gd_scene load_steps=19 format=4 uid="uid://cx4h6jyw2xueo"]
 
 [ext_resource type="PackedScene" uid="uid://c64xx8srpcx5p" path="res://2d/game_1/scenes/music.tscn" id="1_ey254"]
 [ext_resource type="Script" path="res://2d/game_1/scripts/game_manager.gd" id="2_6sagy"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3w784nifhhb5" path="res://2d/game_1/scenes/coin.tscn" id="8_3fqjn"]
 [ext_resource type="PackedScene" uid="uid://dlkekr25gye2q" path="res://2d/game_1/scenes/platform.tscn" id="9_t6w6n"]
 [ext_resource type="PackedScene" uid="uid://cf02yq77kaepl" path="res://2d/game_1/scenes/enemy_slime_red.tscn" id="10_3rhqf"]
+[ext_resource type="PackedScene" uid="uid://ckwhaunvo46vn" path="res://2d/game_1/scenes/portal.tscn" id="10_insa8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3ko7"]
 texture = ExtResource("3_vktvd")
@@ -427,3 +428,11 @@ position = Vector2(-474, -55)
 [node name="enemy_slime_red" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_3rhqf")]
 position = Vector2(-146, -28)
 player = NodePath("../Player")
+
+[node name="Portal" parent="." instance=ExtResource("10_insa8")]
+position = Vector2(-251, -74)
+
+[node name="DestinationPoint" parent="Portal" index="2"]
+position = Vector2(-118, -60)
+
+[editable path="Portal"]
