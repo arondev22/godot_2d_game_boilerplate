@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://cx4h6jyw2xueo"]
+[gd_scene load_steps=18 format=4 uid="uid://cx4h6jyw2xueo"]
 
 [ext_resource type="PackedScene" uid="uid://c64xx8srpcx5p" path="res://2d/game_1/scenes/music.tscn" id="1_ey254"]
 [ext_resource type="Script" path="res://2d/game_1/scripts/game_manager.gd" id="2_6sagy"]
 [ext_resource type="Texture2D" uid="uid://d0q2g65ahgok" path="res://2d/game_1/assets/sprites/world_tileset.png" id="3_vktvd"]
 [ext_resource type="PackedScene" uid="uid://cdqjsnjahy8av" path="res://2d/game_1/scenes/player.tscn" id="4_7p8j6"]
-[ext_resource type="PackedScene" uid="uid://dp30ayhwvv5t2" path="res://2d/game_1/scenes/enemy_slime.tscn" id="5_awh8y"]
 [ext_resource type="PackedScene" uid="uid://e4b2vhkkst4n" path="res://2d/game_1/scenes/killzone.tscn" id="6_xfqtj"]
 [ext_resource type="FontFile" uid="uid://dbjl1e6kdxpl6" path="res://2d/game_1/assets/fonts/PixelOperator8.ttf" id="7_agffg"]
 [ext_resource type="PackedScene" uid="uid://d3w784nifhhb5" path="res://2d/game_1/scenes/coin.tscn" id="8_3fqjn"]
@@ -388,9 +387,6 @@ limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="enemy_slime" parent="." instance=ExtResource("5_awh8y")]
-position = Vector2(238, -12)
-
 [node name="Killzone" parent="." instance=ExtResource("6_xfqtj")]
 position = Vector2(21, 114)
 
@@ -428,5 +424,6 @@ autoplay = "move"
 [node name="Platform" parent="Platforms" instance=ExtResource("9_t6w6n")]
 position = Vector2(-474, -55)
 
-[node name="Node2D" parent="." instance=ExtResource("10_3rhqf")]
-position = Vector2(158, -28)
+[node name="enemy_slime_red" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_3rhqf")]
+position = Vector2(-146, -28)
+player = NodePath("../Player")

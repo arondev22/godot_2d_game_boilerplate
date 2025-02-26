@@ -1,38 +1,42 @@
-[gd_scene load_steps=9 format=3 uid="uid://cf02yq77kaepl"]
+[gd_scene load_steps=11 format=3 uid="uid://cf02yq77kaepl"]
 
 [ext_resource type="Texture2D" uid="uid://bwoec51f6mei0" path="res://2d/game_1/assets/sprites/slime_purple.png" id="1_a50ip"]
+[ext_resource type="Script" path="res://2d/game_1/scripts/enemy_slime_red.gd" id="1_vpont"]
 [ext_resource type="PackedScene" uid="uid://e4b2vhkkst4n" path="res://2d/game_1/scenes/killzone.tscn" id="2_ogep8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_isx3v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2mt4"]
+size = Vector2(14, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl8jb"]
 atlas = ExtResource("1_a50ip")
 region = Rect2(0, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5fxl1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5gij"]
 atlas = ExtResource("1_a50ip")
 region = Rect2(24, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f83py"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x3k0"]
 atlas = ExtResource("1_a50ip")
 region = Rect2(48, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3eoyb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mm3v"]
 atlas = ExtResource("1_a50ip")
 region = Rect2(72, 24, 24, 24)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_iipap"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_wgof8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_isx3v")
+"texture": SubResource("AtlasTexture_gl8jb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5fxl1")
+"texture": SubResource("AtlasTexture_i5gij")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f83py")
+"texture": SubResource("AtlasTexture_3x3k0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3eoyb")
+"texture": SubResource("AtlasTexture_8mm3v")
 }],
 "loop": true,
 "name": &"default",
@@ -42,15 +46,31 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdg4m"]
 size = Vector2(14, 11)
 
-[node name="Node2D" type="Node2D"]
+[node name="enemy_slime_red" type="CharacterBody2D"]
+script = ExtResource("1_vpont")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_j2mt4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_iipap")
+sprite_frames = SubResource("SpriteFrames_wgof8")
 autoplay = "default"
-frame_progress = 0.114761
+flip_h = true
+
+[node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(1, 5)
+target_position = Vector2(-68, 0)
+collision_mask = 2
 
 [node name="Killzone" parent="." instance=ExtResource("2_ogep8")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_kdg4m")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
